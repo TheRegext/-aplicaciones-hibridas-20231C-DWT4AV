@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import './ProductListItem.css'
+import { Link } from 'react-router-dom'
 
 function ProductListItem({product}){
     return (
@@ -9,7 +10,7 @@ function ProductListItem({product}){
                 <h3 className='product-list-item__name'>{product.name} <span className='product-list-item__code'>code: {product._id}</span></h3>
                 <p className='product-list-item__price'>Precio: ${product.price}</p>
                 <div className='product-list-item__actions'>
-                    <a className='product-list-item__view' href="#">Ver Producto</a>
+                    <Link className='product-list-item__view' to={`/products/${product._id}`}>Ver Producto</Link>
                 </div>
             </div>
         </li>
