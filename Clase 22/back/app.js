@@ -1,6 +1,7 @@
 import express from 'express'
 import ProductRoute from './routes/products.routes.js'
 import ProductRouteApi from './api/routes/products.api.routes.js'
+import AccountRoute from './api/routes/account.api.routes.js'
 import cors from 'cors'
 
 const app = express() // creea el servidor
@@ -13,6 +14,7 @@ app.use('/', express.static('public'))
 
 app.use('/', ProductRoute)
 app.use('/api', ProductRouteApi)
+app.use('/api', AccountRoute)
 
 app.listen(2023, function () {
     console.log('Servidor corriendo en el host http://localhost:2023')

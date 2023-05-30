@@ -1,6 +1,6 @@
-import { productScheme, productUpdateScheme } from '../schemes/products.schemes.js'
+import * as productSchemas from '../schemas/products.schemas.js'
 function validateProduct(req, res, next) {
-    productScheme.validate(req.body, { abortEarly: false, stripUnknown: true })
+    productSchemas.product.validate(req.body, { abortEarly: false, stripUnknown: true })
         .then(function (product) {
             req.body = product
             next() // ejecuta el siguien paso
@@ -11,7 +11,7 @@ function validateProduct(req, res, next) {
 }
 
 function validateProductUpdate(req, res, next) {
-    productUpdateScheme.validate(req.body, { abortEarly: false, stripUnknown: true })
+    productSchemas.productUpdate.validate(req.body, { abortEarly: false, stripUnknown: true })
         .then(function (product) {
             req.body = product
             next() // ejecuta el siguien paso
