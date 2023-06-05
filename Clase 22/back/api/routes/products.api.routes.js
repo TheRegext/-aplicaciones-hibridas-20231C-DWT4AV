@@ -2,15 +2,11 @@ import { Router } from 'express'
 import * as controller from '../controllers/products.api.controllers.js'
 import ReviewRoute from './products.reviews.api.routes.js'
 import { validateProduct, validateProductUpdate } from '../../middlewares/products.validate.middlewares.js'
+import { tokenVerify } from '../../middlewares/token.validate.middleware.js'
 
 const route = Router()
 
-function captar(req, res, next) {
-    console.log("Accedieron a los Productos")
-    next()
-}
-
-route.use('/products', captar)
+route.use('/products', tokenVerify)
 
 route.get('/products', controller.getProducts)
 route.post('/products', [validateProduct], controller.createProduct)

@@ -8,7 +8,9 @@ const router = Router()
 /// register
 router.post('/account', [validateAccount], controller.createAccount)
 
-router.post('/account/login', [validateAccount], controller.login)
+router.post('/session', [validateAccount], controller.login)
+
+router.delete('/session', controller.logout)
 
 
 

@@ -4,6 +4,8 @@ import * as service from '../../services/products.services.js'
 function getProducts(req, res) {
     const filter = req.query
 
+    console.log("Usuario: ", req.account)
+
     service.getProducts(filter)
         .then(function (products) {
             res.status(200).json(products) // res.send(JSON.stringify(products))
