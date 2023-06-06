@@ -1,19 +1,16 @@
 import { useParams } from "react-router-dom"
 import {useState, useEffect} from 'react'
+import productsService from "../../services/products.service"
 
 function ProductDetailsPage(){
     const [product, setProduct] = useState({})
     const {idProduct} = useParams()
 
-
     useEffect(()=>{
-
-        fetch(`http://localhost:2023/api/products/${idProduct}`)
-        .then(response => response.json())
-        .then(data=>{
-            setProduct(data) // forzar el render
+        productsService.getById(idProduct)
+        .then(product=>{
+            setProduct(product) // forzar el render
         })
-
     }, [idProduct])
 
     return (

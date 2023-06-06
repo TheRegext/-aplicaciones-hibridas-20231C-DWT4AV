@@ -5,7 +5,8 @@ import App from './App'
 import Error404Page from './pages/Error404Page'
 import ProductListPage from './pages/products/ProductListPage'
 import ProductDetailsPage from './pages/products/ProductDetailsPage'
- 
+import LoginPage from './pages/LoginPage'
+import RoutePrivate from './components/RoutePrivate'
 
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 
@@ -13,7 +14,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <RoutePrivate><App /></RoutePrivate>,
     errorElement: <Error404Page />,
     children:[
       {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
         element: <ProductDetailsPage />
       }
     ]
+  },
+  {
+    path: '/login',
+    element: <LoginPage />
   }
   
 ])
