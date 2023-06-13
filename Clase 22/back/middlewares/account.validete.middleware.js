@@ -11,6 +11,20 @@ async function validateAccount(req, res, next) {
         })
 }
 
+
+async function validateProfile(req, res, next) {
+    return accountSchemas.profile.validate(req.body, { abortEarly: false, stripUnknown: true })
+        .then((profile) => {
+            req.body = profile
+            next()
+        })
+        .catch((err) => {
+            res.status(400).json({ error: err })
+        })
+}
+
+
 export {
-    validateAccount
+    validateAccount,
+    validateProfile
 }

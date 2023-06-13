@@ -1,0 +1,23 @@
+.main-nav-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+}
+
+.main-nav-list__link{
+    display: block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.main-nav-list__link:hover{
+    background-color: #000;
+    color: #fff;
+}
