@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useCallback} from 'react'
 import './LoginPage.css'
 import { useNavigate } from 'react-router-dom'
 import authService from '../services/auth.service'
@@ -10,20 +10,20 @@ function LoginPage(){
 
     const navigate = useNavigate()
 
-    const onChangeUserName = (event) =>{
+    const onChangeUserName = useCallback((event) =>{
         setUserName(event.target.value)
-    }
+    }, [setUserName])
 
-    const onChangePassword = (event) =>{
+    const onChangePassword = useCallback((event) =>{
         setPassword(event.target.value)
-    }
+    }, [setPassword])
 
     useEffect(()=>{
         authService.logout()
         localStorage.removeItem('token')
     }, [])
 
-    const onSubmit = (event) =>{
+    const onSubmit = useCallback((event) =>{
         event.preventDefault()
 
         authService.login({userName, password})
@@ -35,12 +35,10 @@ function LoginPage(){
             navigate('/', {replace: true}) // reemplaza la pagina actual en el historial
         })
         .catch(e=>{
-            console.log("Error al iniciar sesion", error)
+            console.log("Error al iniciar sesion", e)
             setError(e.error.message)
         })
-
-
-    }
+    },[userName, password, navigate, setError] )
 
     return(
         <div className='login-page'>

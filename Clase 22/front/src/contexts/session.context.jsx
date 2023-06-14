@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState, useCallback } from "react"
 import profileService from '../services/profile.service'
 import authService from '../services/auth.service'
 import { useNavigate } from 'react-router-dom'
@@ -7,19 +7,16 @@ const SessionContext = createContext()
 
 function useProfile(){
     const { profile } = useContext(SessionContext)
-
     return profile
 }
 
 function useOnLogout(){
     const { onLogout } = useContext(SessionContext)
-
     return onLogout
 }
 
 function useSession(){
     const { profile, onLogout } = useContext(SessionContext)
-
     return { profile, onLogout }
 }
 
@@ -27,11 +24,11 @@ function SessionProvider({children}){
     const [profile, setProfile] = useState({})
     const navigate = useNavigate()
 
-    const onLogout = () =>{
+    const onLogout = useCallback(() =>{
         authService.logout()
         localStorage.removeItem('token')
         navigate('/login', {replace: true})
-    }
+    }, [navigate])
 
     useEffect(() => {
         profileService.getCurrent()
